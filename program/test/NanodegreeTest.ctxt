@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=NanodegreeTest
+comment1.params=
+comment1.target=NanodegreeTest()
+comment2.params=
+comment2.target=void\ setUp()
+comment3.params=
+comment3.target=void\ tearDown()
+comment4.params=
+comment4.target=void\ shouldCalculateTheCostOfANanodegree()
+comment5.params=
+comment5.target=void\ shouldThrowExceptionIfNanodegreeHasNoCourses()
+comment6.params=
+comment6.target=void\ shouldThrowExceptionIfThereIsErrorInweeks()
+comment7.params=
+comment7.target=void\ shouldThrowExceptionIfThereIsErrorInweeksType()
+comment8.params=
+comment8.target=void\ shouldThrowExceptionIfweeksIsNotKnown()
+numComments=9

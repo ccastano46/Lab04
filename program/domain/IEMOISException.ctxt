@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=IEMOISException
+comment0.text=\r\n\ Clase\ para\ manejo\ de\ excepciones\ dentro\ de\ nuestro\ programa\ IMOIS\r\n\r\n\ @author\ (Casta\u00F1o\ -\ Camargo)\r\n\ @version\ (31/03/2023)\r\n
+comment1.params=message
+comment1.target=IEMOISException(java.lang.String)
+comment1.text=\r\n\ Constructor\ de\ la\ excepcion\ IMOIS\r\n
+numComments=2
