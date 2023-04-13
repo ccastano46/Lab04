@@ -45,11 +45,34 @@ public class NanodegreeTest{
         Nanodegree s = new Nanodegree("FRONT END DEVELOPER", 10);
         try { 
            int weeks=s.weeks();
-           s.weeks("max");
            fail("Did not throw exception");
         } catch (IEMOISException e) {
             assertEquals(IEMOISException.NANO_EMPTY,e.getMessage());
-        }    
+        }
+        try{
+            s.weeks("max");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(IEMOISException.NANO_EMPTY,e.getMessage());
+        }
+        try{
+            s.weeks("min");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(IEMOISException.NANO_EMPTY,e.getMessage());
+        }
+        try{
+            s.weeks("avg");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(IEMOISException.NANO_EMPTY,e.getMessage());
+        }
+        try{
+            s.weeks(10);
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(IEMOISException.NANO_EMPTY,e.getMessage());
+        }
     }    
     
     
@@ -74,12 +97,46 @@ public class NanodegreeTest{
         s.addCourse(new Course("INTRO TO JAVASCRIPT",3));
         s.addCourse(new Course("JAVASCRIPT AND THE DOM", -2));
         try { 
-           assertEquals(9,s.weeks("max"));
-           assertEquals(8,s.weeks("min"));
-           assertEquals(7,s.weeks("avg"));
-        } catch (IEMOISException e) {
+           int weeks=s.weeks();
             fail("Did not throw exception");
-        }    
+        } catch (IEMOISException e) {
+            assertEquals(IEMOISException.WEEKS_ERROR,e.getMessage());
+        }
+        try { 
+           int weeks=s.weeks(5);
+           fail("Did not throw exception");
+        } catch (IEMOISException e) {
+           assertEquals(IEMOISException.WEEKS_ERROR,e.getMessage());
+        }
+    }
+    
+    @Test
+    public void shouldNotThrowExceptionIfThereIsErrorInweeksType(){
+        Nanodegree s = new Nanodegree("FRONT END DEVELOPER", 1);
+        s.addCourse(new Course("INTRO TO HTML AND CSS", 2));
+        s.addCourse(new Course("INTRO TO JAVASCRIPT",3));
+        s.addCourse(new Course("JAVASCRIPT AND THE DOM", -2));
+        s.addCourse(new Course("JAVASCRIPT", -1));
+        s.addCourse(new Course("SLQ", 5));
+        try { 
+           int weeks=s.weeks("max");
+           assertEquals(weeks,21);
+        } catch (IEMOISException e) {
+           fail("Threw a exception");
+        }
+        try { 
+           int weeks=s.weeks("min");
+           assertEquals(weeks,13);
+        } catch (IEMOISException e) {
+           fail("Threw a exception");
+        }
+        try { 
+           int weeks=s.weeks("avg");
+           assertEquals(weeks,13);
+        } catch (IEMOISException e) {
+           fail("Threw a exception");
+        }
+        
     }
     
    @Test
@@ -93,8 +150,34 @@ public class NanodegreeTest{
            fail("Did not throw exception");
         } catch (IEMOISException e) {
             assertEquals(IEMOISException.WEEKS_EMPTY,e.getMessage());
+        }
+    }
+    
+    @Test
+    public void shouldNotThrowExceptionIfweeksIsNotKnown(){
+        Nanodegree s = new Nanodegree("FRONT END DEVELOPER", 1);
+        s.addCourse(new Course("INTRO TO HTML AND CSS", 2));
+        s.addCourse(new Course("INTRO TO JAVASCRIPT",null));
+        s.addCourse(new Course("JAVASCRIPT AND THE DOM", -2));
+        try { 
+           int weeks=s.weeks("max");
+           assertEquals(weeks,7);
+        } catch (IEMOISException e) {
+           fail("Threw a exception");
         }    
-    }  
+        try { 
+           int weeks=s.weeks("min");
+           assertEquals(weeks,5);
+        } catch (IEMOISException e) {
+           fail("Threw a exception");
+        }
+        try { 
+           int weeks=s.weeks("avg");
+           assertEquals(weeks,3);
+        } catch (IEMOISException e) {
+           System.out.println(e +"?");
+        }
+    }
     
     
     
