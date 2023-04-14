@@ -55,8 +55,8 @@ public class Nanodegree extends Program{
      */
     public int weeks(String type) throws IEMOISException{
         int weeks = projectWeeks;
-        int max = projectWeeks;
-        double min = projectWeeks;
+        int max = 0;
+        double min = Double.POSITIVE_INFINITY;
         int suma = 0;
         if(courses.size() == 0) throw new IEMOISException(IEMOISException.NANO_EMPTY);
         for(Course c : courses){
@@ -68,7 +68,7 @@ public class Nanodegree extends Program{
                     if((double) c.weeks() < min) min = c.weeks();
                 }
             }catch(IEMOISException e){
-                System.out.println(c.getName() + " No tiene una semana aceptada");
+                e.printStackTrace();
             }
         }
         suma = (int) suma/(courses.size()+projectWeeks);

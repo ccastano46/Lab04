@@ -126,7 +126,7 @@ public class NanodegreeTest{
         }
         try { 
            int weeks=s.weeks("min");
-           assertEquals(weeks,13);
+           assertEquals(weeks,15);
         } catch (IEMOISException e) {
            fail("Threw a exception");
         }
@@ -154,6 +154,40 @@ public class NanodegreeTest{
     }
     
     @Test
+    public void shouldThrowExceptionIfIsImposibleCalculateType(){
+        Nanodegree s = new Nanodegree("FRONT END DEVELOPER", 1);
+        s.addCourse(new Course("INTRO TO HTML AND CSS", 0));
+        s.addCourse(new Course("INTRO TO JAVASCRIPT",0));
+        s.addCourse(new Course("JAVASCRIPT AND THE DOM", 0));
+        try { 
+           int weeks=s.weeks("max");
+           fail("Did not throw exception");
+        } catch (IEMOISException e) {
+            assertEquals(IEMOISException.IMPOSSIBLE,e.getMessage());
+        }
+        Nanodegree a = new Nanodegree("FRONT END DEVELOPER", 1);
+        a.addCourse(new Course("INTRO TO HTML AND CSS", null));
+        a.addCourse(new Course("INTRO TO JAVASCRIPT",0));
+        a.addCourse(new Course("JAVASCRIPT AND THE DOM", 0));
+        try { 
+           int weeks=a.weeks("min");
+           fail("Did not throw exception");
+        } catch (IEMOISException e) {
+            assertEquals(IEMOISException.IMPOSSIBLE,e.getMessage());
+        }
+        Nanodegree b = new Nanodegree("FRONT END DEVELOPER", 1);
+        b.addCourse(new Course("INTRO TO HTML AND CSS", null));
+        b.addCourse(new Course("INTRO TO JAVASCRIPT",0));
+        b.addCourse(new Course("JAVASCRIPT AND THE DOM", -3));
+        try { 
+           int weeks=b.weeks("avg");
+           fail("Did not throw exception");
+        } catch (IEMOISException e) {
+            assertEquals(IEMOISException.IMPOSSIBLE,e.getMessage());
+        }
+    }
+    
+    @Test
     public void shouldNotThrowExceptionIfweeksIsNotKnown(){
         Nanodegree s = new Nanodegree("FRONT END DEVELOPER", 1);
         s.addCourse(new Course("INTRO TO HTML AND CSS", 2));
@@ -167,7 +201,7 @@ public class NanodegreeTest{
         }    
         try { 
            int weeks=s.weeks("min");
-           assertEquals(weeks,5);
+           assertEquals(weeks,7);
         } catch (IEMOISException e) {
            fail("Threw a exception");
         }

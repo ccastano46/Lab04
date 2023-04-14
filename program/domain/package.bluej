@@ -1,8 +1,8 @@
 #BlueJ package file
-dependency1.from=Course
+dependency1.from=Program
 dependency1.to=IEMOISException
 dependency1.type=UsesDependency
-dependency2.from=Program
+dependency2.from=Course
 dependency2.to=IEMOISException
 dependency2.type=UsesDependency
 dependency3.from=Nanodegree
