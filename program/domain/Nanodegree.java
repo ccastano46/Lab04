@@ -58,10 +58,12 @@ public class Nanodegree extends Program{
         int max = 0;
         double min = Double.POSITIVE_INFINITY;
         int suma = 0;
+        int semanasAceptadas = 0;
         if(courses.size() == 0) throw new IEMOISException(IEMOISException.NANO_EMPTY);
         for(Course c : courses){
             try{
                 suma += c.weeks();
+                semanasAceptadas++;
                 if(type.equals("max")){
                     if(c.weeks() > max) max = c.weeks();
                 }else if(type.equals("min")){
@@ -71,10 +73,8 @@ public class Nanodegree extends Program{
                 e.printStackTrace();
             }
         }
-        suma = (int) suma/(courses.size()+projectWeeks);
-        if((type.equals("max") && max == 0) || (type.equals("min") && min == Double.POSITIVE_INFINITY ) || (type.equals("avg") && suma == 0)){
-           throw new IEMOISException(IEMOISException.IMPOSSIBLE);  
-        }
+        if(semanasAceptadas == 0) throw new IEMOISException(IEMOISException.IMPOSSIBLE);
+        suma = (int) suma/semanasAceptadas;
         for(Course c : courses){
             try{
                 weeks += c.weeks();
@@ -88,7 +88,6 @@ public class Nanodegree extends Program{
                 }
             }
         }
-        System.out.println(max+" max,"+min+" min, "+suma+" avg");
         return weeks;
     }   
     

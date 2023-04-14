@@ -38,6 +38,17 @@ public class NanodegreeTest{
         } catch (IEMOISException e){
             fail("Threw a exception");
         }    
+        Nanodegree a = new Nanodegree("FRONT END DEVELOPER", 1);
+        a.addCourse(new Course("INTRO TO HTML AND CSS", null));
+        a.addCourse(new Course("INTRO TO JAVASCRIPT", 3));
+        a.addCourse(new Course("JAVASCRIPT AND THE DOM", 2));
+        try {
+           assertEquals(8,a.weeks(2));
+           assertEquals(10,a.weeks(4));
+           assertEquals(15,a.weeks(9));
+        } catch (IEMOISException e){
+            fail("Threw a exception");
+        }    
     }    
     
     @Test
@@ -84,6 +95,7 @@ public class NanodegreeTest{
         s.addCourse(new Course("JAVASCRIPT AND THE DOM", -2));
         try { 
            int weeks=s.weeks();
+           int weeks2 = s.weeks(5);
            fail("Did not throw exception");
         } catch (IEMOISException e) {
             assertEquals(IEMOISException.WEEKS_ERROR,e.getMessage());
@@ -132,7 +144,7 @@ public class NanodegreeTest{
         }
         try { 
            int weeks=s.weeks("avg");
-           assertEquals(weeks,13);
+           assertEquals(weeks,17);
         } catch (IEMOISException e) {
            fail("Threw a exception");
         }
@@ -207,9 +219,9 @@ public class NanodegreeTest{
         }
         try { 
            int weeks=s.weeks("avg");
-           assertEquals(weeks,3);
+           assertEquals(weeks,7);
         } catch (IEMOISException e) {
-           System.out.println(e +"?");
+           fail(e.getMessage());
         }
     }
     
