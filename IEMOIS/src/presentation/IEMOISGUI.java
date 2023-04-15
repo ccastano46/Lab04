@@ -1,7 +1,7 @@
 package presentation; 
  
 import domain.*;
-
+import javax.swing.JOptionPane;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -38,8 +38,10 @@ public class IEMOISGUI extends JFrame{
     
 
     
-    private IEMOISGUI(){
+    private IEMOISGUI() {
+        
         programs=new IEMOIS();
+        
         prepareElements();
         prepareActions();
     }
@@ -200,8 +202,9 @@ public class IEMOISGUI extends JFrame{
         
         /*Add*/
         buttonAdd.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev){
-                actionAdd();                    
+            public void actionPerformed(ActionEvent ev) {
+                actionAdd();
+                                  
             }
         });
         
@@ -236,12 +239,19 @@ public class IEMOISGUI extends JFrame{
         textDetails.setText(programs.toString());
     }
     
-    private void  actionAdd(){
-        if (courses.getText().trim().equals("")){
-            programs.addCourse(name.getText(),projectWeeks.getText());
-        }else{ 
-            programs.addNanodegree(name.getText(),projectWeeks.getText(),courses.getText());
-        }
+    private void  actionAdd() {
+        
+        try{
+            if (courses.getText().trim().equals("")){
+            
+                programs.addCourse(name.getText(),projectWeeks.getText());
+                
+            }else{ 
+                programs.addNanodegree(name.getText(),projectWeeks.getText(),courses.getText());
+            }
+        }catch (IEMOISException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
     }
 
     private void actionSearch(){

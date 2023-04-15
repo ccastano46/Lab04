@@ -13,6 +13,7 @@ public class IEMOISException extends Exception
     public static final String WEEKS_ERROR = "Error";
     public static final String NANO_EMPTY = "NANO_EMPTY";
     public static final String IMPOSSIBLE = "IMPOSSIBLE";
+    public static final String PROGRAMA_EXISTENTE = "Ya existe un programa con ese nombre";
 
     
     /**

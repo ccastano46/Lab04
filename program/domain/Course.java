@@ -26,3 +26,4 @@ public class Course extends Program{
         return name;
     }
 }
+
