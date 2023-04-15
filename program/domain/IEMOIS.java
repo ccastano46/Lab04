@@ -48,7 +48,7 @@ public class IEMOIS{
             {
                 addNanodegree(s[0],s[1],s[2]);
             }
-            catch (domain.IEMOISException iemoise)
+            catch (IEMOISException iemoise)
             {
                 iemoise.printStackTrace();
             }

@@ -250,7 +250,8 @@ public class IEMOISGUI extends JFrame{
                 programs.addNanodegree(name.getText(),projectWeeks.getText(),courses.getText());
             }
         }catch (IEMOISException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
+            if(e.getMessage().equals(IEMOISException.PROGRAMA_EXISTENTE)) JOptionPane.showMessageDialog(null, e.getMessage());
+            else if(e.getMessage().equals(IEMOISException.CURSO_NO_REGISTRADO)) JOptionPane.showMessageDialog(null, "Existe un " + e.getMessage() + " dentro del Nanodegree");
             }
     }
 

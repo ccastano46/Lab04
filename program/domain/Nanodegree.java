@@ -23,7 +23,8 @@ public class Nanodegree extends Program{
      * Add a new course
      * @param c
      */   
-    public void addCourse(Course c){
+    public void addCourse(Course c) throws IEMOISException{
+        if(c==null) throw new IEMOISException(IEMOISException.CURSO_NO_REGISTRADO);
         courses.add(c);
     }
        

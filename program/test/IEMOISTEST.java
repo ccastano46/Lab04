@@ -81,6 +81,29 @@ public class IEMOISTEST
             fail("Threw a exception");
         }
     }
+    @Test
+    public void shouldThrowExceptionIfCourseNotRegistred(){
+        IEMOIS ie = new IEMOIS();
+        try{
+            ie.addNanodegree("Ingeniería de Sistemas","5","Programación Orientada a Objetos\nAprendiendo a Aprender. MacMaster-California. Coursera");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.CURSO_NO_REGISTRADO);
+        }
+        try{
+            ie.addNanodegree("Ingeniería de Sistemas","5","Aprendiendo a Aprender. MacMaster-California. Coursera\nProgramación Orientada a Objetosn\nIntroduction to Computer Science and Programming Using Python");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.CURSO_NO_REGISTRADO);
+        }
+        try{
+            ie.addNanodegree("Ingeniería de Sistemas","5","Aprendiendo a Aprender. MacMaster-California. Coursera\nIntroduction to Computer Science and Programming Using Python\nProgramación Orientada a Objetos");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.CURSO_NO_REGISTRADO);
+        }
+        
+    }
     
     
 }
