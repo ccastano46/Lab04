@@ -77,6 +77,7 @@ public class IEMOIS{
      * @throws CURSO_EXISTENTE, si ya existe un curso con ese nombre
     */
     public void addCourse(String name, String price) throws IEMOISException{ 
+        if(name.equals("")) throw new IEMOISException(IEMOISException.CURSO_EMPTY);
         for(Program p: programs){
             if(p.name().toUpperCase().equals(name.toUpperCase())) throw new IEMOISException(IEMOISException.PROGRAMA_EXISTENTE);
         }

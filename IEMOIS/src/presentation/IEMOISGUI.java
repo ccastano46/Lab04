@@ -19,6 +19,7 @@ public class IEMOISGUI extends JFrame{
                          new Dimension(PREFERRED_WIDTH,PREFERRED_HIGH);
 
     private IEMOIS programs;
+    private Log log;
 
     /*List*/
     private JButton buttonList;
@@ -41,7 +42,7 @@ public class IEMOISGUI extends JFrame{
     private IEMOISGUI() {
         
         programs=new IEMOIS();
-        
+
         prepareElements();
         prepareActions();
     }
@@ -236,32 +237,41 @@ public class IEMOISGUI extends JFrame{
 
     
     private void actionList(){
-        textDetails.setText(programs.toString());
+        try{
+            textDetails.setText(programs.toString());
+        }catch(Exception e){
+            Log.record(e);
+        }
     }
     
     private void  actionAdd() {
-        
         try{
             if (courses.getText().trim().equals("")){
-            
                 programs.addCourse(name.getText(),projectWeeks.getText());
-                
             }else{ 
                 programs.addNanodegree(name.getText(),projectWeeks.getText(),courses.getText());
             }
         }catch (IEMOISException e) {
             if(e.getMessage().equals(IEMOISException.PROGRAMA_EXISTENTE)) JOptionPane.showMessageDialog(null, e.getMessage());
             else if(e.getMessage().equals(IEMOISException.CURSO_NO_REGISTRADO)) JOptionPane.showMessageDialog(null, "Existe un " + e.getMessage() + " dentro del Nanodegree");
-            }
+            else if(e.getMessage().equals(IEMOISException.CURSO_EMPTY)) JOptionPane.showMessageDialog(null, e.getMessage());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ups... Porfavor verifica tus entradas");
+        }
     }
 
     private void actionSearch(){
         String patronBusqueda=textSearch.getText();
         String answer = "";
-        if(patronBusqueda.length() > 0) {
-            answer = programs.search(patronBusqueda);
+        try{
+            if(patronBusqueda.length() > 0) {
+                answer = programs.search(patronBusqueda);
+            }
+            textResults.setText(answer);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            Log.record(e);
         }
-        textResults.setText(answer);
     } 
     
    public static void main(String args[]){

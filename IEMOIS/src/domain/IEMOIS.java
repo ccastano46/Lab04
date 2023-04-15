@@ -76,7 +76,8 @@ public class IEMOIS{
      * @param price, numero de semanas que dura el curso
      * @throws CURSO_EXISTENTE, si ya existe un curso con ese nombre
     */
-    public void addCourse(String name, String price) throws IEMOISException{ 
+    public void addCourse(String name, String price) throws IEMOISException{
+        if(name.equals("")) throw new IEMOISException(IEMOISException.CURSO_EMPTY);
         for(Program p: programs){
             if(p.name().toUpperCase().equals(name.toUpperCase())) throw new IEMOISException(IEMOISException.PROGRAMA_EXISTENTE);
         }

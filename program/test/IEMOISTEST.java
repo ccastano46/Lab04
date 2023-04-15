@@ -102,7 +102,17 @@ public class IEMOISTEST
         }catch(IEMOISException e){
             assertEquals(e.getMessage(), IEMOISException.CURSO_NO_REGISTRADO);
         }
-        
+    }
+    
+    @Test
+    public void shouldThrowExceptionIfCourseIsEmpty(){
+        IEMOIS ie = new IEMOIS();
+        try{
+            ie.addCourse("","5");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.CURSO_EMPTY);
+        }
     }
     
     
