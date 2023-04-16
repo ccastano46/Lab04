@@ -115,5 +115,49 @@ public class IEMOISTEST
         }
     }
     
+    @Test
+    public void shouldThrowExceptionIfWeekIsEmpty(){
+        IEMOIS ie = new IEMOIS();
+        try{
+            ie.addCourse("MATD","");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.SEMANA_EMPTY);
+        }
+        try{
+            ie.addNanodegree("Sistemas","","Introduction to Computer Science and Programming Using Python");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.SEMANA_EMPTY);
+        }
+    }
     
+    @Test
+    public void shouldThrowExceptionIfWeekIsNegativeOrCero(){
+        IEMOIS ie = new IEMOIS();
+        try{
+            ie.addCourse("MATD","-10");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.SEMANA_INACEPTADA);
+        }
+        try{
+            ie.addCourse("MATD","0");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.SEMANA_INACEPTADA);
+        }
+        try{
+            ie.addNanodegree("Sistemas","-6","Introduction to Computer Science and Programming Using Python");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.SEMANA_INACEPTADA);
+        }
+        try{
+            ie.addNanodegree("Sistemas","0","Introduction to Computer Science and Programming Using Python");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.SEMANA_INACEPTADA);
+        }
+    }
 }

@@ -78,6 +78,8 @@ public class IEMOIS{
     */
     public void addCourse(String name, String price) throws IEMOISException{ 
         if(name.equals("")) throw new IEMOISException(IEMOISException.CURSO_EMPTY);
+        if(price.equals("")) throw new IEMOISException(IEMOISException.SEMANA_EMPTY);
+        if(Integer.parseInt(price) <= 0) throw new IEMOISException(IEMOISException.SEMANA_INACEPTADA);
         for(Program p: programs){
             if(p.name().toUpperCase().equals(name.toUpperCase())) throw new IEMOISException(IEMOISException.PROGRAMA_EXISTENTE);
         }
@@ -96,6 +98,8 @@ public class IEMOIS{
         for(Program p: programs){
             if(p.name().toUpperCase().equals(name.toUpperCase())) throw new IEMOISException(IEMOISException.PROGRAMA_EXISTENTE);
         }
+        if(projectWeeks.equals("")) throw new IEMOISException(IEMOISException.SEMANA_EMPTY);
+        if(Integer.parseInt(projectWeeks) <= 0) throw new IEMOISException(IEMOISException.SEMANA_INACEPTADA);
         Nanodegree s = new Nanodegree(name,Integer.parseInt(projectWeeks));
         String [] aCourses= courses.split("\n");
         for (String p : aCourses){
