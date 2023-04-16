@@ -115,5 +115,15 @@ public class IEMOISTEST
         }
     }
     
+    @Test
+    public void shouldThrowExceptionWhenSearch(){
+        IEMOIS ie = new IEMOIS();
+        try{
+            ie.search("I");
+        }catch(Exception e){
+            fail("Threw a exception");
+        }
+    }
+    
     
 }

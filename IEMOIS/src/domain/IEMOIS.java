@@ -109,14 +109,17 @@ public class IEMOIS{
      * @param  
      * @return 
      */
-    public LinkedList<Program> select(String prefix){
-        LinkedList <Program> answers=null;
+    public LinkedList<Program> select(String prefix) throws IEMOISException{
+        //System.out.println(prefix);
+        LinkedList <Program> answers=new LinkedList<Program>();
         prefix=prefix.toUpperCase();
         for(int i=0;i<programs.size();i++){
             if(programs.get(i).name().toUpperCase().startsWith(prefix)){
+                //System.out.println(programs.get(i).name());
                 answers.add(programs.get(i));
             }   
         }
+        if(answers.size()==0) throw new IEMOISException(IEMOISException.SEARCH_EMPTY);
         return answers;
     }
 
@@ -127,10 +130,10 @@ public class IEMOIS{
      * @param selected
      * @return  
      */
-    public String data(LinkedList<Program> selected){
+    public String data(LinkedList<Program> selected) {
         StringBuffer answer=new StringBuffer();
-        answer.append(programs.size()+ " programas\n");
-        for(Program p : programs) {
+        answer.append(selected.size()+ " programas\n");
+        for(Program p : selected) {
             try{
                 answer.append(p.data());
                 answer.append("\n");
@@ -147,7 +150,7 @@ public class IEMOIS{
      * @param prefix
      * @return  
      */ 
-    public String search(String prefix){
+    public String search(String prefix)throws IEMOISException{
         return data(select(prefix));
     }
     

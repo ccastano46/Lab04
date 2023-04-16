@@ -110,10 +110,12 @@ public class IEMOIS{
      * @return 
      */
     public LinkedList<Program> select(String prefix){
-        LinkedList <Program> answers=null;
+        //System.out.println(prefix);
+        LinkedList <Program> answers=new LinkedList<Program>();;
         prefix=prefix.toUpperCase();
         for(int i=0;i<programs.size();i++){
             if(programs.get(i).name().toUpperCase().startsWith(prefix)){
+                //System.out.println(programs.get(i).name());
                 answers.add(programs.get(i));
             }   
         }
@@ -129,8 +131,8 @@ public class IEMOIS{
      */
     public String data(LinkedList<Program> selected){
         StringBuffer answer=new StringBuffer();
-        answer.append(programs.size()+ " programas\n");
-        for(Program p : programs) {
+        answer.append(selected.size()+ " programas\n");
+        for(Program p : selected) {
             try{
                 answer.append(p.data());
                 answer.append("\n");

@@ -265,7 +265,11 @@ public class IEMOISGUI extends JFrame{
         String answer = "";
         try{
             if(patronBusqueda.length() > 0) {
-                answer = programs.search(patronBusqueda);
+                try{
+                    answer = programs.search(patronBusqueda);
+                }catch(IEMOISException e){
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             }
             textResults.setText(answer);
         }catch(Exception e){

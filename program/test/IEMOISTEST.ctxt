@@ -9,4 +9,6 @@ comment3.params=
 comment3.target=void\ shouldThrowExceptionIfCourseNotRegistred()
 comment4.params=
 comment4.target=void\ shouldThrowExceptionIfCourseIsEmpty()
-numComments=5
+comment5.params=
+comment5.target=void\ shouldThrowExceptionWhenSearch()
+numComments=6
