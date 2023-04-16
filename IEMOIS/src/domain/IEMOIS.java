@@ -99,6 +99,7 @@ public class IEMOIS{
             if(p.name().toUpperCase().equals(name.toUpperCase())) throw new IEMOISException(IEMOISException.PROGRAMA_EXISTENTE);
         }
         if(projectWeeks.equals("")) throw new IEMOISException(IEMOISException.SEMANA_EMPTY);
+        if(projectWeeks.contains(" ")) throw new IEMOISException(IEMOISException.FORMATO_SEMANA_INAPROPIADO);
         if(Integer.parseInt(projectWeeks) <= 0) throw new IEMOISException(IEMOISException.SEMANA_INACEPTADA);
         Nanodegree s = new Nanodegree(name,Integer.parseInt(projectWeeks));
         String [] aCourses= courses.split("\n");
@@ -173,6 +174,23 @@ public class IEMOIS{
      */
     public int numberPrograms(){
         return programs.size();
+    }
+
+    /**
+     * Metodo que indica si el programa IEMOIS contiene a un curso o un proyecto en especifico
+     * @param objeto, objeto a ser comparado.
+     */
+    public boolean contains(Object objeto){
+        try{
+            Program p = (Program) objeto;
+            for(Program program: programs){
+                if(program.name().equals(((Program) objeto).name()) && ((objeto instanceof Course && program instanceof Course) || (objeto instanceof Nanodegree && program instanceof Nanodegree))) return true;
+            }
+            
+        }catch(ClassCastException e){
+            return false;
+        }
+        return false;
     }
 
 }

@@ -18,6 +18,7 @@ public class IEMOISException extends Exception
     public static final String CURSO_EMPTY = "El curso que se va a registrar no tiene nombre";
     public static final String SEMANA_EMPTY = "El curso o proyecto que se va a registrar no tiene numero de semanas";
     public static final String SEMANA_INACEPTADA = "La semana del curso o proyecto no puede ser un valor negativo o 0 ";
+    public static final String FORMATO_SEMANA_INAPROPIADO = "El formato de semana no es aceptado";
     /**
      * Constructor de la excepcion IMOIS
      */

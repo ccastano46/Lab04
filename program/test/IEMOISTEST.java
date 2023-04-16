@@ -17,6 +17,31 @@ import org.junit.Test;
 public class IEMOISTEST
 {
     @Test
+    public void shouldAdd(){
+        IEMOIS ie = new IEMOIS();
+        assertTrue(ie.contains(new Course("Aprendiendo a Aprender. MacMaster-California. Coursera", 4)));
+        assertTrue(ie.contains(new Course("Introduction to Computer Science and Programming Using Python", 8)));
+        try
+        {
+            ie.addCourse("MATD","16");
+        }
+        catch (IEMOISException iemoise)
+        {
+            fail("Threw an exception");
+        }
+        assertTrue(ie.contains(new Course("MATD", 16)));
+        try
+        {
+            ie.addNanodegree("Ingeniería de Sistemas","360","MATD");
+        }
+        catch (IEMOISException iemoise)
+        {
+            fail("Threw an exception");
+        }
+        assertTrue(ie.contains(new Nanodegree("Ingeniería de Sistemas",360)));
+        
+    }
+    @Test
     public void shouldThrowExceptionIfNameAlreadyExists(){
         IEMOIS ie = new IEMOIS();
         try{
@@ -167,6 +192,23 @@ public class IEMOISTEST
             fail("Did not throw exception");
         }catch(IEMOISException e){
             assertEquals(e.getMessage(), IEMOISException.SEMANA_INACEPTADA);
+        }
+    }
+    
+    @Test
+    public void shouldThrowExceptionifIsAnSpaceInWeeks(){
+        IEMOIS ie = new IEMOIS();
+        try{
+            ie.addNanodegree("Sistemas","10 20","Introduction to Computer Science and Programming Using Python");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.FORMATO_SEMANA_INAPROPIADO);
+        }
+        try{
+            ie.addNanodegree("Sistemas","10  ","Introduction to Computer Science and Programming Using Python");
+            fail("Did not throw exception");
+        }catch(IEMOISException e){
+            assertEquals(e.getMessage(), IEMOISException.FORMATO_SEMANA_INAPROPIADO);
         }
     }
 }
