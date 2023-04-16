@@ -255,8 +255,11 @@ public class IEMOISGUI extends JFrame{
             if(e.getMessage().equals(IEMOISException.PROGRAMA_EXISTENTE)) JOptionPane.showMessageDialog(null, e.getMessage());
             else if(e.getMessage().equals(IEMOISException.CURSO_NO_REGISTRADO)) JOptionPane.showMessageDialog(null, "Existe un " + e.getMessage() + " dentro del Nanodegree");
             else if(e.getMessage().equals(IEMOISException.CURSO_EMPTY)) JOptionPane.showMessageDialog(null, e.getMessage());
+            else if(e.getMessage().equals(IEMOISException.SEMANA_EMPTY)) JOptionPane.showMessageDialog(null, e.getMessage());
+            else if(e.getMessage().equals(IEMOISException.SEMANA_INACEPTADA)) JOptionPane.showMessageDialog(null, e.getMessage());
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Ups... Porfavor verifica tus entradas");
+            Log.record(e);
         }
     }
 
